@@ -3,6 +3,7 @@ const user = require("../user");
 
 test.beforeEach(async ({ page }) => {
   await page.goto("https://netology.ru/?modal=sign_in");
+  await page.screenshot({ path: "screenshot1.png", fullPage: true });
   await page.getByPlaceholder("Email").fill(user.validEmail);
 });
 
@@ -23,6 +24,7 @@ test.describe("Netology.ru login", () => {
     await expect(
       page.getByRole("heading", { name: "Мои курсы и профессии" })
     ).toBeVisible();
+    await page.screenshot({ path: "screenshot3.png", fullPage: true });
   });
 
   test("invalid login", async ({ page }) => {
@@ -34,5 +36,6 @@ test.describe("Netology.ru login", () => {
 
     // Assert The profile page should not opened
     await expect(page.getByTestId("login-error-hint")).toBeVisible();
+    await page.screenshot({ path: "screenshot4.png", fullPage: true });
   });
 });
